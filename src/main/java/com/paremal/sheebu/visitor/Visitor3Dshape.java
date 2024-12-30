@@ -69,7 +69,7 @@ class Cylinder implements  ThreeDShape{
     }
 }
 public class Visitor3Dshape implements Visitor   {
-   static double total_volume=0.0;
+    double total_volume=0.0;
 
 
 
@@ -107,7 +107,7 @@ public class Visitor3Dshape implements Visitor   {
 
     public static void main(String[] args) {
         List<ThreeDShape> threeDShapeList= new ArrayList<>();
-        Visitor visitor= new Visitor3Dshape();
+        Visitor3Dshape visitor= new Visitor3Dshape();
         threeDShapeList.add(new Qube(10.0));
         threeDShapeList.add(new Box(10.0,5.0));
         threeDShapeList.add(new Sphere(10.0));
@@ -115,6 +115,6 @@ public class Visitor3Dshape implements Visitor   {
         for(ThreeDShape threeDShape:threeDShapeList){
             threeDShape.accept(visitor);
         }
-        System.out.println(total_volume);
+        System.out.println(visitor.total_volume);
     }
 }
