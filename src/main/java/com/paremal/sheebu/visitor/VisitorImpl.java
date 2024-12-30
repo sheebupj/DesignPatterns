@@ -69,7 +69,7 @@ class AreaCalculator implements ShapeVisitor {
 }
 
 // Main class
-public class Visitor {
+public class VisitorImpl {
     public static void main(String[] args) {
         List<Shape> shapes = new ArrayList<>();
         shapes.add(new Circle());
