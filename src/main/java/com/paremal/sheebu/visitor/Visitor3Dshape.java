@@ -7,15 +7,16 @@ interface Visitor{
     void visit(Qube qube);
     void visit(Box box);
     void visit(Sphere sphere);
+    void visit(Cylinder cylinder);
 }
 interface ThreeDShape{
     void accept(Visitor visitor);
 }
 
 class Qube implements ThreeDShape{
-    Integer side;
+    Double side;
 
-    public Qube(Integer side) {
+    public Qube(Double side) {
         this.side = side;
     }
 
@@ -27,10 +28,10 @@ class Qube implements ThreeDShape{
 }
 class Box implements ThreeDShape{
 
-    Integer length;
-    Integer breadth;
+    Double length;
+    Double breadth;
 
-    public Box(Integer length, Integer breadth) {
+    public Box(Double length, Double breadth) {
         this.length = length;
         this.breadth = breadth;
     }
@@ -42,9 +43,23 @@ class Box implements ThreeDShape{
 }
 class Sphere implements ThreeDShape{
 
-    Integer radius;
+    Double radius;
 
-    public Sphere(Integer radius) {
+    public Sphere(Double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+}
+class Cylinder implements  ThreeDShape{
+    Double height;
+    Double radius;
+
+    public Cylinder(Double height, Double radius) {
+        this.height = height;
         this.radius = radius;
     }
 
@@ -82,12 +97,21 @@ public class Visitor3Dshape implements Visitor   {
 
     }
 
+    @Override
+    public void visit(Cylinder cylinder) {
+        Double r= Math.PI * cylinder.radius*cylinder.radius*cylinder.height;
+        total_volume=total_volume+ r;
+        System.out.println("Cylinder volume="+r);
+
+    }
+
     public static void main(String[] args) {
         List<ThreeDShape> threeDShapeList= new ArrayList<>();
         Visitor visitor= new Visitor3Dshape();
-        threeDShapeList.add(new Qube(10));
-        threeDShapeList.add(new Box(10,5));
-        threeDShapeList.add(new Sphere(10));
+        threeDShapeList.add(new Qube(10.0));
+        threeDShapeList.add(new Box(10.0,5.0));
+        threeDShapeList.add(new Sphere(10.0));
+        threeDShapeList.add(new Cylinder(10.0,5.0));
         for(ThreeDShape threeDShape:threeDShapeList){
             threeDShape.accept(visitor);
         }
